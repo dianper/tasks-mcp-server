@@ -1,0 +1,14 @@
+{
+  "inputs": [],
+  "servers": {
+    "TasksMcpServer": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "C:\\Projects\\Personal\\tasks-mcp-server\\Tasks.McpServer\\Tasks.McpServer.csproj"
+      ]
+    }
+  }
+}
