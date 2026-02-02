@@ -1,6 +1,6 @@
-﻿namespace aspire_mcp_server.McpServer;
+﻿namespace Tasks.McpServer;
 
-using aspire_mcp_server.McpServer.ApiClient;
+using Tasks.McpServer.ApiClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -16,18 +16,20 @@ public class Program
             options.LogToStandardErrorThreshold = LogLevel.Trace;
         });
 
-        builder.Services.AddHttpClient<TasksApiClient>(client =>
-        {
-            // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
-            // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
-            client.BaseAddress = new("https://localhost:7376");
-            client.Timeout = TimeSpan.FromSeconds(30);
-        });
-
         builder.Services
-            .AddMcpServer()
+            .AddApiClients()
+            .AddMcpServer(options =>
+            {
+                options.ServerInfo = new ModelContextProtocol.Protocol.Implementation
+                {
+                    Name = "Tasks & Repo Auditor",
+                    Description = "A Model Context Protocol server that provides tools to manage tasks and audit repositories.",
+                    Version = "1.0.0"
+                };
+            })
             .WithStdioServerTransport()
-            .WithToolsFromAssembly();
+            .WithToolsFromAssembly()
+            .WithPromptsFromAssembly();
 
         await builder
             .Build()
