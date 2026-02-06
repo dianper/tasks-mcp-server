@@ -1,9 +1,10 @@
 ﻿namespace Tasks.McpServer;
 
-using Tasks.McpServer.ApiClient;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Tasks.McpServer.ApiClient;
+using Tasks.McpServer.Resources;
 
 public class Program
 {
@@ -29,7 +30,8 @@ public class Program
             })
             .WithStdioServerTransport()
             .WithToolsFromAssembly()
-            .WithPromptsFromAssembly();
+            .WithPromptsFromAssembly()
+            .WithResourcesFromAssembly();
 
         await builder
             .Build()

@@ -21,4 +21,18 @@ public class GitHubApiClient(HttpClient httpClient)
     {
         return await _httpClient.GetFromJsonAsync<GitHubRepoInfo>($"/repos/{owner}/{repo}");
     }
+
+    public async Task<string> GetRepoReadmeAsync(string owner, string repo)
+    {
+        var requestUri = $"/repos/{owner}/{repo}/readme";
+        var response = await _httpClient.GetAsync(requestUri);
+        
+        if (!response.IsSuccessStatusCode)
+        {
+            return $"Error fetching README: {response.ReasonPhrase}";
+        }
+        
+        var readmeContent = await response.Content.ReadAsStringAsync();
+        return readmeContent;
+    }
 }
