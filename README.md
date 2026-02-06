@@ -54,6 +54,12 @@ The core engine that translates AI intent into code execution:
 - `daily-planner`: Instructs the AI to analyze all tasks, identify overdue items, and suggest a 3-point priority list for the user.
 - `auto-sync-repo`: A specialized agent workflow that audits a specific repository and syncs the latest issues into the local task database in one click.
 
+## MCP Resources
+
+| Resource Name | Description |
+|-----------|-------------|
+| `GitHub Repository README` | Fetches the README file of a GitHub repository. |
+
 ## Configuration & Installation
 
 To use this server with Claude Desktop or any MCP-compatible IDE, add the following to your configuration file (e.g., %APPDATA%\Labs\Claude\claude_desktop_config.json):
@@ -68,7 +74,7 @@ To use this server with Claude Desktop or any MCP-compatible IDE, add the follow
       "args": [
         "run",
         "--project",
-        "C:\\Path\\To\\Your\\Project\\Tasks.McpServer\\Tasks.McpServer.csproj"
+        "<YOUR-PROJECT-PATH>\\Tasks.McpServer\\Tasks.McpServer.csproj"
       ]
     }
   }
@@ -76,7 +82,7 @@ To use this server with Claude Desktop or any MCP-compatible IDE, add the follow
 ```
 
 ### Prerequisites
-- .NET 9 SDK
+- .NET 10 SDK
 - (Optional) GitHub Personal Access Token (for higher rate limits).
 
 ## Deep Dive: Why this matters?
